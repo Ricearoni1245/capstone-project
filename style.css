@@ -96,6 +96,28 @@ footer {
     border-radius: 5px;
 }
 
+
+#bookings {
+    background-color: #f3f3f3;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#booking-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+#booking-list li {
+    background-color: #ffffff;
+    padding: 0.8rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
 /* Responsive Design */
 @media (min-width: 768px) {
     main {

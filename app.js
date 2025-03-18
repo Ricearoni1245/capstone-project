@@ -1,3 +1,4 @@
+// Booking Form Logic
 document.getElementById('booking-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -16,9 +17,9 @@ document.getElementById('booking-form').addEventListener('submit', function(even
 
     const booking = { name, date };
     saveBooking(booking);
+    displayBookings();  // Refresh the list dynamically
 
     displayMessage(`✅ Booking confirmed for ${name} on ${date}!`, 'success');
-
     document.getElementById('booking-form').reset();
 });
 
@@ -41,3 +42,34 @@ function displayMessage(message, type) {
         messageBox.remove();
     }, 3000);
 }
+
+// Fetch and Display Booking Data
+async function displayBookings() {
+    const bookingList = document.getElementById('booking-list');
+    bookingList.innerHTML = '';
+
+    // Add local storage bookings
+    const storedBookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    storedBookings.forEach(booking => {
+        const listItem = document.createElement('li');
+        listItem.textContent = `📝 ${booking.name} - ${booking.date}`;
+        bookingList.appendChild(listItem);
+    });
+
+    // Fetch mock API data for dynamic entries
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        const users = await response.json();
+
+        users.forEach(user => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `📅 ${user.name} - Sample Date: ${new Date().toISOString().split('T')[0]}`;
+            bookingList.appendChild(listItem);
+        });
+    } catch (error) {
+        displayMessage("❌ Failed to fetch booking data from the API.", 'error');
+    }
+}
+
+// Load booking list when page loads
+document.addEventListener('DOMContentLoaded', displayBookings);
