@@ -12,23 +12,62 @@ header {
     padding: 1rem;
 }
 
-nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
 }
 
-#booking {
-    margin: 2rem auto;
-    width: 80%;
-    max-width: 500px;
+nav li {
+    margin: 0 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+#booking, #about, #contact {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    gap: 1rem;
 }
 
-label, input, button {
-    margin-bottom: 1rem;
+label {
+    font-weight: bold;
+}
+
+input, button {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
 }
