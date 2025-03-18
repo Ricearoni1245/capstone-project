@@ -71,3 +71,22 @@ footer {
     text-align: center;
     padding: 1rem;
 }
+
+
+.success {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.error {
+    background-color: #f44336;
+    color: #fff;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+    border-radius: 5px;
+}
