@@ -3,57 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Capstone Project - Booking App</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Capstone Project - Booking System</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Welcome to Our Booking App</h1>
-        <nav>
-            <ul>
-                <li><a href="#booking">Book a Table</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <h1>Booking System</h1>
     </header>
 
     <main>
-        <section id="booking">
-            <h2>Book Your Table Now!</h2>
-            <form id="booking-form" aria-labelledby="booking">
+        <section id="booking-section">
+            <h2>Book Your Appointment</h2>
+            <form id="booking-form">
                 <label for="name">Name:</label>
-                <input 
-                    type="text" 
-                    id="name" 
-                    placeholder="Enter your name" 
-                    required 
-                    aria-required="true"
-                >
-    
+                <input type="text" id="name" placeholder="Enter your name" required>
+
                 <label for="date">Date:</label>
-                <input 
-                    type="date" 
-                    id="date" 
-                    required 
-                    aria-required="true"
-                >
-    
-                <button type="submit">Submit</button>
+                <input type="date" id="date" required>
+
+                <button type="submit">Confirm Booking</button>
             </form>
+
+            <div id="messages"></div>
         </section>
-    
-        <section id="bookings">
-            <h2>Current Bookings</h2>
-            <ul id="booking-list"></ul>
+
+        <section id="bookings-list">
+            <h2>Previous Bookings</h2>
+            <ul id="booking-records">
+                <!-- Booking records will be added dynamically -->
+            </ul>
         </section>
     </main>
-    
 
-    <footer>
-        <p>&copy; 2024 Capstone Project. All rights reserved.</p>
-    </footer>
-
-    <script src="app.js"></script>
+    <script src="app.js" type="module"></script>
 </body>
 </html>

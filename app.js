@@ -1,75 +1,62 @@
-// Booking Form Logic
-document.getElementById('booking-form').addEventListener('submit', function(event) {
-    event.preventDefault();
+// Ensure the DOM is fully loaded before executing the code
+document.addEventListener('DOMContentLoaded', function () {
+    const bookingForm = document.getElementById('booking-form');
 
-    const name = document.getElementById('name').value.trim();
-    const date = document.getElementById('date').value;
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-    if (!name) {
-        displayMessage("❌ Please enter your name.", 'error');
-        return;
+            const name = document.getElementById('name').value.trim();
+            const date = document.getElementById('date').value;
+
+            if (!name || !date) {
+                displayMessage('❌ Please fill out all fields.', 'error');
+                return;
+            }
+
+            const booking = { name, date };
+            saveBooking(booking);
+
+            displayMessage(`✅ Booking confirmed for ${name} on ${date}!`, 'success');
+        });
+    } else {
+        console.warn('⚠️ Booking form not found in the DOM');
     }
-
-    if (!date) {
-        displayMessage("❌ Please select a date.", 'error');
-        return;
-    }
-
-    const booking = { name, date };
-    saveBooking(booking);
-    displayBookings();  // Refresh the list dynamically
-
-    displayMessage(`✅ Booking confirmed for ${name} on ${date}!`, 'success');
-    document.getElementById('booking-form').reset();
 });
 
-// Save data in Local Storage
-function saveBooking(booking) {
+// Save Booking Function
+export function saveBooking(booking) {
     const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
     bookings.push(booking);
     localStorage.setItem('bookings', JSON.stringify(bookings));
 }
 
-// Display confirmation or error messages
-function displayMessage(message, type) {
+// Display Message Function
+export function displayMessage(message, type) {
     const messageBox = document.createElement('div');
     messageBox.textContent = message;
     messageBox.className = type === 'success' ? 'success' : 'error';
 
-    document.body.insertBefore(messageBox, document.getElementById('booking-form').parentElement);
+    const messagesContainer = document.getElementById('messages') || document.body;
+    messagesContainer.appendChild(messageBox);
 
     setTimeout(() => {
         messageBox.remove();
     }, 3000);
 }
 
-// Fetch and Display Booking Data
-async function displayBookings() {
-    const bookingList = document.getElementById('booking-list');
-    bookingList.innerHTML = '';
+export function displayBookings() {
+    const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
+    const bookingRecords = document.getElementById('booking-records');
 
-    // Add local storage bookings
-    const storedBookings = JSON.parse(localStorage.getItem('bookings')) || [];
-    storedBookings.forEach(booking => {
-        const listItem = document.createElement('li');
-        listItem.textContent = `📝 ${booking.name} - ${booking.date}`;
-        bookingList.appendChild(listItem);
+    bookingRecords.innerHTML = ''; // Clear existing records
+
+    bookings.forEach(booking => {
+        const li = document.createElement('li');
+        li.textContent = `${booking.name} - ${booking.date}`;
+        bookingRecords.appendChild(li);
     });
-
-    // Fetch mock API data for dynamic entries
-    try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/users');
-        const users = await response.json();
-
-        users.forEach(user => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `📅 ${user.name} - Sample Date: ${new Date().toISOString().split('T')[0]}`;
-            bookingList.appendChild(listItem);
-        });
-    } catch (error) {
-        displayMessage("❌ Failed to fetch booking data from the API.", 'error');
-    }
 }
 
-// Load booking list when page loads
+// Initialize booking list display on page load
 document.addEventListener('DOMContentLoaded', displayBookings);
