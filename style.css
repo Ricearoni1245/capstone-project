@@ -3,13 +3,15 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-color: #f0f2f5;
+    color: #333;
 }
 
 header {
     background-color: #4CAF50;
     color: white;
     text-align: center;
-    padding: 1rem;
+    padding: 1.5rem;
 }
 
 nav ul {
@@ -34,10 +36,12 @@ main {
     grid-template-columns: 1fr;
     gap: 2rem;
     padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-#booking, #about, #contact {
-    background-color: #f9f9f9;
+section {
+    background-color: #ffffff;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -48,13 +52,9 @@ form {
     gap: 1rem;
 }
 
-label {
-    font-weight: bold;
-}
-
 input, button {
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.8rem;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
@@ -63,6 +63,12 @@ button {
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 footer {
@@ -71,7 +77,6 @@ footer {
     text-align: center;
     padding: 1rem;
 }
-
 
 .success {
     background-color: #4CAF50;
@@ -89,4 +94,17 @@ footer {
     margin: 1rem 0;
     text-align: center;
     border-radius: 5px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }

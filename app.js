@@ -1,30 +1,28 @@
-// Booking Form Logic
 document.getElementById('booking-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
-    const name = document.getElementById('name').value;
+    const name = document.getElementById('name').value.trim();
     const date = document.getElementById('date').value;
 
-    if (name && date) {
-        const booking = {
-            name: name,
-            date: date
-        };
-
-        // Save booking in local storage
-        saveBooking(booking);
-
-        // Display confirmation message
-        displayMessage(`✅ Booking confirmed for ${name} on ${date}!`, 'success');
-
-        // Clear form fields
-        document.getElementById('booking-form').reset();
-    } else {
-        displayMessage("❌ Please fill in all fields.", 'error');
+    if (!name) {
+        displayMessage("❌ Please enter your name.", 'error');
+        return;
     }
+
+    if (!date) {
+        displayMessage("❌ Please select a date.", 'error');
+        return;
+    }
+
+    const booking = { name, date };
+    saveBooking(booking);
+
+    displayMessage(`✅ Booking confirmed for ${name} on ${date}!`, 'success');
+
+    document.getElementById('booking-form').reset();
 });
 
-// Save booking data in Local Storage
+// Save data in Local Storage
 function saveBooking(booking) {
     const bookings = JSON.parse(localStorage.getItem('bookings')) || [];
     bookings.push(booking);
